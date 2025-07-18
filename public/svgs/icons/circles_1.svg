@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="560" viewBox="0 0 560 560" fill="none">
+  <!-- 背景模糊效果 -->
+  <g filter="url(#filter0_f_3163_28467)">
+    <circle cx="300" cy="300" r="60" fill="#A990F5" />
+  </g>
+
+  <!-- 背景圆环 -->
+  <mask id="mask0_3163_28467" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="60" y="60" width="240" height="240">
+    <circle cx="180" cy="180" r="120" fill="white" />
+  </mask>
+  <g mask="url(#mask0_3163_28467)">
+    <g filter="url(#filter1_i_3163_28467)">
+      <circle cx="180" cy="180" r="180" fill="white" />
+      <circle cx="180" cy="180" r="179.5" stroke="url(#paint0_linear_3163_28467)" />
+    </g>
+    <g filter="url(#filter2_i_3163_28467)">
+      <circle cx="180" cy="180" r="140" fill="white" />
+      <circle cx="180" cy="180" r="139.5" stroke="url(#paint1_linear_3163_28467)" />
+    </g>
+    <g filter="url(#filter3_i_3163_28467)">
+      <circle cx="180" cy="180" r="100" fill="white" />
+      <circle cx="180" cy="180" r="99.5" stroke="url(#paint2_linear_3163_28467)" />
+    </g>
+  </g>
+
+  <!-- 中心固定区域 -->
+  <rect x="120.5" y="120.5" width="119" height="119" rx="59.5" fill="url(#paint3_radial_3163_28467)" />
+  <rect x="120.5" y="120.5" width="119" height="119" rx="59.5" stroke="url(#paint4_linear_3163_28467)" />
+
+  <!-- 中心钻石logo -->
+  <g filter="url(#filter4_dddd_3163_28467)">
+    <path
+      d="M175.599 140.038C175.611 140.039 175.622 140.041 175.633 140.043C175.64 140.044 175.647 140.046 175.654 140.048C175.665 140.051 175.675 140.055 175.686 140.059C175.692 140.062 175.699 140.063 175.705 140.066C175.712 140.069 175.717 140.074 175.724 140.078C175.735 140.085 175.747 140.092 175.758 140.1L201.249 159.337L224.198 157.925L224.254 157.927C224.258 157.927 224.262 157.929 224.266 157.93L224.284 157.932C224.296 157.934 224.307 157.939 224.318 157.943C224.325 157.946 224.332 157.948 224.338 157.951C224.36 157.961 224.38 157.973 224.399 157.988C224.4 157.989 224.402 157.99 224.404 157.992L245.318 175.396C245.39 175.456 245.429 175.546 245.423 175.639C245.416 175.732 245.364 175.817 245.284 175.866L173.298 219.859C173.294 219.861 173.29 219.862 173.285 219.865C173.28 219.867 173.275 219.87 173.27 219.872C173.257 219.878 173.244 219.884 173.231 219.888C173.226 219.889 173.221 219.891 173.215 219.893C173.201 219.896 173.186 219.898 173.171 219.899C173.168 219.9 173.166 219.901 173.164 219.901L173.163 219.9C173.146 219.901 173.129 219.901 173.112 219.899C173.103 219.898 173.093 219.896 173.084 219.894C173.076 219.892 173.068 219.89 173.061 219.888C173.052 219.885 173.044 219.882 173.036 219.879C173.025 219.875 173.014 219.87 173.003 219.864C172.999 219.861 172.995 219.859 172.99 219.857C172.975 219.847 172.959 219.837 172.946 219.824L114.092 165.194C114.007 165.115 113.978 164.993 114.017 164.884C114.057 164.776 114.157 164.7 114.273 164.693L152.037 162.367L175.375 140.117L175.377 140.116C175.405 140.089 175.437 140.07 175.472 140.056C175.474 140.055 175.477 140.055 175.48 140.054C175.496 140.048 175.512 140.044 175.528 140.041C175.53 140.041 175.532 140.04 175.534 140.04C175.543 140.039 175.552 140.038 175.561 140.037H175.589C175.593 140.037 175.596 140.038 175.599 140.038Z"
+      fill="url(#paint5_radial_3163_28467)">
+      <!-- logo闪烁动画 -->
+      <animate attributeName="fill-opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- 白色闪光层 -->
+  <path
+    d="M175.599 140.038C175.611 140.039 175.622 140.041 175.633 140.043C175.64 140.044 175.647 140.046 175.654 140.048C175.665 140.051 175.675 140.055 175.686 140.059C175.692 140.062 175.699 140.063 175.705 140.066C175.712 140.069 175.717 140.074 175.724 140.078C175.735 140.085 175.747 140.092 175.758 140.1L201.249 159.337L224.198 157.925L224.254 157.927C224.258 157.927 224.262 157.929 224.266 157.93L224.284 157.932C224.296 157.934 224.307 157.939 224.318 157.943C224.325 157.946 224.332 157.948 224.338 157.951C224.36 157.961 224.38 157.973 224.399 157.988C224.4 157.989 224.402 157.99 224.404 157.992L245.318 175.396C245.39 175.456 245.429 175.546 245.423 175.639C245.416 175.732 245.364 175.817 245.284 175.866L173.298 219.859C173.294 219.861 173.29 219.862 173.285 219.865C173.28 219.867 173.275 219.87 173.27 219.872C173.257 219.878 173.244 219.884 173.231 219.888C173.226 219.889 173.221 219.891 173.215 219.893C173.201 219.896 173.186 219.898 173.171 219.899C173.168 219.9 173.166 219.901 173.164 219.901L173.163 219.9C173.146 219.901 173.129 219.901 173.112 219.899C173.103 219.898 173.093 219.896 173.084 219.894C173.076 219.892 173.068 219.89 173.061 219.888C173.052 219.885 173.044 219.882 173.036 219.879C173.025 219.875 173.014 219.87 173.003 219.864C172.999 219.861 172.995 219.859 172.99 219.857C172.975 219.847 172.959 219.837 172.946 219.824L114.092 165.194C114.007 165.115 113.978 164.993 114.017 164.884C114.057 164.776 114.157 164.7 114.273 164.693L152.037 162.367L175.375 140.117L175.377 140.116C175.405 140.089 175.437 140.07 175.472 140.056C175.474 140.055 175.477 140.055 175.48 140.054C175.496 140.048 175.512 140.044 175.528 140.041C175.53 140.041 175.532 140.04 175.534 140.04C175.543 140.039 175.552 140.038 175.561 140.037H175.589C175.593 140.037 175.596 140.038 175.599 140.038Z"
+    fill="white" opacity="0">
+    <!-- 白色闪光动画 -->
+    <animate attributeName="opacity" values="0;0;1;0;0" dur="3s" repeatCount="indefinite" />
+  </path>
+
+  <!-- 其他钻石部分 -->
+  <path d="M245.512 175.61L173.317 219.999L114.293 164.878L224.537 158.049L245.512 175.61Z" fill="#E36700" />
+  <path d="M245.512 175.61L173.317 219.999L114.293 164.878L224.537 158.049L245.512 175.61Z"
+    fill="url(#paint6_linear_3163_28467)" fill-opacity="0.5" />
+  <path
+    d="M173.317 219.999L245.512 175.61L224.537 158.049M173.317 219.999L224.537 158.049M173.317 219.999L114.293 164.878L224.537 158.049"
+    stroke="url(#paint7_linear_3163_28467)" stroke-width="0.585366" stroke-linejoin="round" />
+  <path d="M175.756 140L151.854 162.926L171.366 192.194L193.805 160.487L175.756 140Z" fill="#FBF20A" />
+  <path d="M175.756 140L151.854 162.926L171.366 192.194L193.805 160.487L175.756 140Z"
+    fill="url(#paint8_linear_3163_28467)" />
+  <path
+    d="M151.854 162.926L175.756 140L193.805 160.487M151.854 162.926L193.805 160.487M151.854 162.926L171.366 192.194L193.805 160.487"
+    stroke="#FDE90D" stroke-width="0.585366" stroke-linejoin="round" />
+  <path d="M175.756 140.001L202.097 160L189.414 160.488L175.756 140.001Z" fill="#FF9700"
+    stroke="url(#paint9_linear_3163_28467)" stroke-width="0.585366" stroke-linejoin="round" />
+  <path data-figma-bg-blur-radius="11.7073" d="M173.317 219.999L114.293 164.878L224.537 158.049L173.317 219.999Z"
+    fill="url(#paint10_radial_3163_28467)" stroke="url(#paint11_linear_3163_28467)" stroke-width="0.585366"
+    stroke-linejoin="round" />
+
+  <!-- 动态圆点 - 沿着轨道圆环运动 -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="0 180 180;360 180 180" dur="15s"
+      repeatCount="indefinite" />
+    <rect x="172" y="72" width="16" height="16" rx="8" fill="#FFD047" />
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="120 180 180;480 180 180" dur="20s"
+      repeatCount="indefinite" />
+    <rect x="172" y="40" width="16" height="16" rx="8" fill="#C2AAFA" />
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="240 180 180;600 180 180" dur="25s"
+      repeatCount="indefinite" />
+    <rect x="172" y="0" width="16" height="16" rx="8" fill="#F3ECF7" />
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="0 180 180;-360 180 180" dur="18s"
+      repeatCount="indefinite" />
+    <circle cx="180" cy="40" r="8" fill="#FFD047" />
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="180 180 180;540 180 180" dur="22s"
+      repeatCount="indefinite" />
+    <rect x="172" y="72" width="16" height="16" rx="8" fill="#C2AAFA" />
+  </g>
+
+  <!-- 定义部分 -->
+  <defs>
+    <filter id="filter0_f_3163_28467" x="40" y="40" width="520" height="520" filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_3163_28467" />
+    </filter>
+    <filter id="filter1_i_3163_28467" x="-64" y="-64" width="488" height="488" filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset />
+      <feGaussianBlur stdDeviation="50" />
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.503821 0 0 0 0 0.346304 0 0 0 0 1 0 0 0 0.2 0" />
+      <feBlend mode="normal" in2="shape" result="effect1_innerShadow_3163_28467" />
+    </filter>
+    <filter id="filter2_i_3163_28467" x="-24" y="-24" width="408" height="408" filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset />
+      <feGaussianBlur stdDeviation="50" />
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.503821 0 0 0 0 0.346304 0 0 0 0 1 0 0 0 0.2 0" />
+      <feBlend mode="normal" in2="shape" result="effect1_innerShadow_3163_28467" />
+    </filter>
+    <filter id="filter3_i_3163_28467" x="16" y="16" width="328" height="328" filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset />
+      <feGaussianBlur stdDeviation="50" />
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.503821 0 0 0 0 0.346304 0 0 0 0 1 0 0 0 0.2 0" />
+      <feBlend mode="normal" in2="shape" result="effect1_innerShadow_3163_28467" />
+    </filter>
+    <filter id="filter4_dddd_3163_28467" x="91" y="136.037" width="177.424" height="164.864"
+      filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset dy="4" />
+      <feGaussianBlur stdDeviation="4" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.596078 0 0 0 0 0.509804 0 0 0 0 1 0 0 0 0.2 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3163_28467" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset dy="14" />
+      <feGaussianBlur stdDeviation="7" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.596078 0 0 0 0 0.509804 0 0 0 0 1 0 0 0 0.17 0" />
+      <feBlend mode="normal" in2="effect1_dropShadow_3163_28467" result="effect2_dropShadow_3163_28467" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset dy="33" />
+      <feGaussianBlur stdDeviation="10" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.596078 0 0 0 0 0.509804 0 0 0 0 1 0 0 0 0.1 0" />
+      <feBlend mode="normal" in2="effect2_dropShadow_3163_28467" result="effect3_dropShadow_3163_28467" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        result="hardAlpha" />
+      <feOffset dy="58" />
+      <feGaussianBlur stdDeviation="11.5" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.596078 0 0 0 0 0.509804 0 0 0 0 1 0 0 0 0.03 0" />
+      <feBlend mode="normal" in2="effect3_dropShadow_3163_28467" result="effect4_dropShadow_3163_28467" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect4_dropShadow_3163_28467" result="shape" />
+    </filter>
+    <linearGradient id="paint0_linear_3163_28467" x1="9.62171" y1="11.7" x2="411.925" y2="282.388"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8D75E6" stop-opacity="0.1" />
+      <stop offset="1" stop-color="#D7C4FA" />
+    </linearGradient>
+    <linearGradient id="paint1_linear_3163_28467" x1="47.4836" y1="49.1" x2="360.386" y2="259.635"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3ECF7" />
+      <stop offset="1" stop-color="#C2AAFA" />
+    </linearGradient>
+    <linearGradient id="paint2_linear_3163_28467" x1="85.3454" y1="86.5" x2="308.847" y2="236.882"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EADFF8" />
+      <stop offset="1" stop-color="#F3ECF7" />
+    </linearGradient>
+    <radialGradient id="paint3_radial_3163_28467" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(180 120) rotate(90) scale(120)">
+      <stop stop-color="#E1D2FF" />
+      <stop offset="1" stop-color="#E1D2FF" stop-opacity="0.2" />
+    </radialGradient>
+    <linearGradient id="paint4_linear_3163_28467" x1="180" y1="120" x2="180" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E1D2FF" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#E1D2FF" stop-opacity="0.02" />
+    </linearGradient>
+    <radialGradient id="paint5_radial_3163_28467" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(169.741 162.565) rotate(90) scale(36.2586 49.8252)">
+      <stop stop-color="#FDF949" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#E56E02" />
+    </radialGradient>
+    <linearGradient id="paint6_linear_3163_28467" x1="209.415" y1="219.999" x2="209.415" y2="158.049"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9C416" stop-opacity="0" />
+      <stop offset="1" stop-color="#F9C416" />
+    </linearGradient>
+    <linearGradient id="paint7_linear_3163_28467" x1="179.903" y1="158.049" x2="179.903" y2="219.999"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F99000" />
+      <stop offset="1" stop-color="#F07400" />
+    </linearGradient>
+    <linearGradient id="paint8_linear_3163_28467" x1="172.829" y1="140" x2="172.829" y2="162.926"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6B010" />
+      <stop offset="1" stop-color="#FFFF0B" />
+    </linearGradient>
+    <linearGradient id="paint9_linear_3163_28467" x1="185.512" y1="148.781" x2="182.097" y2="150.732"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB03A" />
+      <stop offset="1" stop-color="#FCEB0C" />
+    </linearGradient>
+    <radialGradient id="paint10_radial_3163_28467" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(169.903 162.439) rotate(90) scale(36.585 49.9698)">
+      <stop stop-color="#FDF949" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#ED9A00" />
+    </radialGradient>
+    <linearGradient id="paint11_linear_3163_28467" x1="169.415" y1="158.049" x2="174.293" y2="188.78"
+      gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF632" />
+      <stop offset="1" stop-color="#ED8B01" />
+    </linearGradient>
+  </defs>
+</svg>
