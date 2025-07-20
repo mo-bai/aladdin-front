@@ -13,21 +13,27 @@ import {
   TextField
 } from '@radix-ui/themes'
 import { useMemo, useState } from 'react'
-import { defaultAgentClassification } from '@/constants'
 import { motion } from 'motion/react'
-import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
+import { get, post } from '@/utils/http'
+import { useQuery } from '@tanstack/react-query'
 
 type BaseForm = Omit<BaseAgent, 'id'> & { id?: number; agentPayType: string }
-export default function AgentForm({ agent }: { agent?: Agent }) {
+
+interface AgentFormProps {
+  agent?: Agent
+  onSuccess?: (agent: Agent) => void
+  onCancel?: () => void
+}
+export default function AgentForm(props: AgentFormProps) {
+  const { agent, onSuccess, onCancel } = props
   const account = useAccount()
-  const router = useRouter()
   const [baseForm, setBaseForm] = useState<BaseForm>(
     agent
       ? (agent as BaseForm)
       : {
           agentName: '',
-          agentType: '', // 'browser-use' | 'virtual-machine'
+          agentType: 'TEXT_GENERATION', // 'browser-use' | 'virtual-machine'
           agentAddress: '',
           description: '',
           authorBio: '',
@@ -40,7 +46,7 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
           reputation: 0,
           successRate: 0,
           totalJobsCompleted: 0,
-          contractType: '', // 'result' | 'algorithm'
+          contractType: 'RESULT', // 'result' | 'algorithm'
           walletAddress: account ? account.address : '',
           agentPayType: 'FREE'
         }
@@ -82,6 +88,11 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
     humanBasedHiringModelFormInitialValue
   )
 
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => get<Category[]>('/api/agent-category/list?page=1&limit=100')
+  })
+
   const handleBaseFormChange = (key: keyof BaseForm, value: any) => {
     setBaseForm({ ...baseForm, [key]: value })
   }
@@ -116,10 +127,10 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
   }, [humanBasedHiringModelForm, expectedMonthlyIncome])
 
   const cancel = () => {
-    router.back()
+    onCancel?.()
   }
 
-  const confirm = () => {
+  const confirm = async () => {
     let result = { ...baseForm }
     if (baseForm.agentPayType === 'PAY_PER_TASK') {
       result = {
@@ -134,6 +145,15 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
     }
     // todo:validate
     console.log('result', result)
+    try {
+      const res = await post('/api/agent/create', result)
+      console.log('res', res)
+      if (res) {
+        onSuccess?.(res as Agent)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -196,13 +216,21 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
         </label>
         <Select.Root
           onValueChange={(value) => {
-            handleBaseFormChange('agentClassification', Number(value))
+            const agentClassification = categories?.find(
+              (item) => item.id === Number(value)
+            )?.name
+            handleBaseFormChange('agentCategory', Number(value))
+            setBaseForm({
+              ...baseForm,
+              agentCategory: Number(value),
+              agentClassification: agentClassification || ''
+            })
           }}
           size='3'
-          value={baseForm.agentClassification.toString()}>
+          value={baseForm.agentCategory.toString()}>
           <Select.Trigger className='flex-1 w-full' />
           <Select.Content>
-            {defaultAgentClassification.map((item) => (
+            {categories?.map((item) => (
               <Select.Item key={item.id} value={item.id.toString()}>
                 {item.name}
               </Select.Item>
@@ -248,7 +276,7 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
           size='3'
           checked={baseForm.agentPayType === 'FREE'}
           onCheckedChange={(e) =>
-            handleBaseFormChange('agentPayType', e ? 'FREE' : '')
+            handleBaseFormChange('agentPayType', e ? 'FREE' : 'PAY_PER_TASK')
           }
         />
       </div>
@@ -281,6 +309,7 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
             }
             placeholder='Enter price per number'
           />
+          USDT/次
         </div>
         <div className='w-full flex items-center gap-x-4 text-left'>
           <label className='w-[150px] shrink-0 font-medium'>人类激励模式</label>
@@ -386,8 +415,8 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
             onValueChange={(value) =>
               handleBaseFormChange('contractType', value)
             }>
-            <RadioGroup.Item value='result'>结果</RadioGroup.Item>
-            <RadioGroup.Item value='algorithm'>算法</RadioGroup.Item>
+            <RadioGroup.Item value='RESULT'>结果</RadioGroup.Item>
+            <RadioGroup.Item value='ALGORITHM'>算法</RadioGroup.Item>
           </RadioGroup.Root>
         </div>
         <div className='w-full flex gap-x-4 text-left'>

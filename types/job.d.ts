@@ -14,6 +14,7 @@ interface BaseJob {
   walletAddress?: string // 创建者钱包地址
   isPublic: boolean // 是否公开
   status: string // 状态 'Open' | 'In Progress' | 'Completed' | 'Cancelled'
+  createdBy: string // 创建者钱包地址
 }
 
 interface FreeJob extends BaseJob {

@@ -1,6 +1,5 @@
-import JobForm from '@/ui/job/JobForm'
-import { defaultJobs } from '@/constants'
 import { Card } from '@radix-ui/themes'
+import JobDistribute from '@/ui/job/JobDistribute'
 
 export default async function AgentDetail({
   params
@@ -8,11 +7,10 @@ export default async function AgentDetail({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const job = defaultJobs.find((job) => job.id === Number(id))
 
   return (
     <Card className='w-full max-w-3xl mx-auto p-6'>
-      <JobForm job={job} />
+      <JobDistribute jobId={Number(id)} visible={true}></JobDistribute>
     </Card>
   )
 }

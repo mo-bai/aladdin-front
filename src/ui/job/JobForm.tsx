@@ -22,11 +22,22 @@ import {
   skillLevels
 } from '@/constants'
 import dayjs from 'dayjs'
+import { get, post } from '@/utils/http'
+import { useQuery } from '@tanstack/react-query'
+import { useAladdin } from '@/hooks/useAladdin'
 
 type BaseForm = Omit<BaseJob, 'id'> & { id?: number }
-export default function JobForm({ job }: { job?: Job }) {
+
+interface JobFormProps {
+  job?: Job
+  onSuccess?: (job: Job) => void
+  onCancel?: () => void
+}
+export default function JobForm(props: JobFormProps) {
+  const { job, onSuccess, onCancel } = props
   const account = useAccount()
   const router = useRouter()
+  const { deposit } = useAladdin()
   const [baseForm, setBaseForm] = useState<BaseForm>({
     jobTitle: '',
     category: '',
@@ -41,7 +52,13 @@ export default function JobForm({ job }: { job?: Job }) {
     escrowEnabled: false,
     walletAddress: account?.address || '',
     isPublic: true,
-    status: 'Open'
+    status: 'OPEN',
+    createdBy: account?.address || ''
+  })
+
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => get<Category[]>('/api/agent-category/list?page=1&limit=100')
   })
 
   const freeJobFormInitialValue: Partial<Omit<FreeJob, keyof BaseForm>> =
@@ -92,8 +109,13 @@ export default function JobForm({ job }: { job?: Job }) {
     router.back()
   }
 
-  const confirm = () => {
-    let result = { ...baseForm }
+  const confirm = async () => {
+    const createdBy = account.address
+    if (!createdBy) {
+      alert('请先登录你的 wallet')
+      return
+    }
+    let result = { ...baseForm, createdBy }
     if (baseForm.paymentType === 'FREE_JOBS') {
       result = {
         ...result,
@@ -105,8 +127,39 @@ export default function JobForm({ job }: { job?: Job }) {
         ...payPerTaskForm
       }
     }
-    // todo:validate
-    console.log('result', result)
+    // todo:扣钱
+    if (baseForm.paymentType === 'FREE_JOBS') {
+      // 质押50USDT
+      try {
+        console.log(`before 质押${(result as FreeJob).budget}USDT`)
+        await deposit((result as FreeJob).budget.toString(), true)
+        console.log(`after 质押${(result as FreeJob).budget}USDT`)
+      } catch (error) {
+        alert('质押失败')
+        return
+      }
+    }
+    if (baseForm.paymentType === 'PAY_PER_TASK') {
+      const maxBudget = (result as PayPerTaskJob).maxBudget
+      try {
+        console.log(`before 质押${maxBudget}USDT`)
+        await deposit(maxBudget.toString(), true)
+        console.log(`after 质押${maxBudget}USDT`)
+      } catch (error) {
+        alert('质押失败')
+        return
+      }
+    }
+
+    try {
+      const res = await post('/api/job/create', result)
+      console.log('res', res)
+      if (res) {
+        onSuccess?.(res as Job)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -135,7 +188,7 @@ export default function JobForm({ job }: { job?: Job }) {
           value={baseForm.category.toString()}>
           <Select.Trigger className='flex-1 w-full' />
           <Select.Content>
-            {defaultAgentClassification.map((item) => (
+            {categories?.map((item) => (
               <Select.Item key={item.id} value={item.id.toString()}>
                 {item.name}
               </Select.Item>
@@ -237,7 +290,10 @@ export default function JobForm({ job }: { job?: Job }) {
           size='2'
           value={dayjs(baseForm.deadline).format('YYYY-MM-DD')}
           onChange={(e) => {
-            handleBaseFormChange('deadline', dayjs(e.target.value).valueOf())
+            handleBaseFormChange(
+              'deadline',
+              dayjs(e.target.value).toISOString()
+            )
           }}
           placeholder='输入任务期限'
         />

@@ -4,6 +4,9 @@ import { Avatar, Badge, Box, Button, Tabs, TextField } from '@radix-ui/themes'
 import { MagnifyingGlassIcon, UploadIcon } from '@radix-ui/react-icons'
 import { defaultCategories, defaultJobs } from '@/constants'
 import { useRouter } from 'next/navigation'
+import { useQuery } from '@tanstack/react-query'
+import { get } from '@/utils/http'
+import { JobUpload } from '@/ui/job/JobUpload'
 
 type Category = {
   id: number
@@ -19,11 +22,14 @@ export default function Job() {
     search: ''
   })
   const [visible, setVisible] = useState(false)
-  const [categories, setCategories] = useState<Category[]>([
-    ...defaultCategories
-  ])
-  const [jobs, setJobs] = useState<Job[]>([...defaultJobs])
-
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => get<Category[]>('/api/agent-category/list?page=1&limit=100')
+  })
+  const { data: jobs, refetch } = useQuery({
+    queryKey: ['jobs/list', filter],
+    queryFn: () => get<Job[]>('/api/job/list?page=1&limit=100')
+  })
   const showVisible = useCallback(() => {
     setVisible(true)
   }, [])
@@ -48,7 +54,8 @@ export default function Job() {
       <div className='w-full mb-8'>
         <Tabs.Root defaultValue='0'>
           <Tabs.List color='indigo' justify='center'>
-            {categories.map((item) => (
+            <Tabs.Trigger value='0'>全部</Tabs.Trigger>
+            {categories?.map((item) => (
               <Tabs.Trigger
                 key={item.id}
                 onClick={() => setFilter({ ...filter, category: item.id })}
@@ -63,7 +70,7 @@ export default function Job() {
       <section>
         <h2 className='text-2xl font-bold mb-6'>任务列表</h2>
         <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-          {jobs.map((job) => (
+          {jobs?.map((job) => (
             <div
               key={job.id}
               onClick={() => router.push(`/job/${job.id}`)}
@@ -93,6 +100,14 @@ export default function Job() {
           ))}
         </div>
       </section>
+      <JobUpload
+        visible={visible}
+        onSuccess={() => {
+          setVisible(false)
+          refetch()
+        }}
+        onClose={() => setVisible(false)}
+      />
     </>
   )
 }

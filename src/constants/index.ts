@@ -193,3 +193,5 @@ export const skillLevels = [
 
 export const AladdinContractAddress =
   '0x578FA8916A5815E1149F0d33de7A6e785644a898'
+
+export const usdtAddress = '0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0'
