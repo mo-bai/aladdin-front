@@ -12,7 +12,7 @@ import {
   TextArea,
   TextField
 } from '@radix-ui/themes'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
 import {
@@ -30,14 +30,23 @@ type BaseForm = Omit<BaseJob, 'id'> & { id?: number }
 
 interface JobFormProps {
   job?: Job
-  onSuccess?: (job: Job) => void
+  onSuccess?: () => void
   onCancel?: () => void
 }
 export default function JobForm(props: JobFormProps) {
   const { job, onSuccess, onCancel } = props
   const account = useAccount()
   const router = useRouter()
-  const { deposit } = useAladdin()
+  const {
+    deposit,
+    actionType,
+    txHash,
+    waitForTransaction,
+    setActionType,
+    isPending,
+    approveUsdt,
+    refetchUsdtAllowance
+  } = useAladdin()
   const [baseForm, setBaseForm] = useState<BaseForm>({
     jobTitle: '',
     category: '',
@@ -109,6 +118,8 @@ export default function JobForm(props: JobFormProps) {
     router.back()
   }
 
+  const [jobInfo, setJobInfo] = useState<Job>()
+  const [amount, setAmount] = useState<string>('')
   const confirm = async () => {
     const createdBy = account.address
     if (!createdBy) {
@@ -127,13 +138,16 @@ export default function JobForm(props: JobFormProps) {
         ...payPerTaskForm
       }
     }
+    // const res = await post('/api/job/create', result)
+    // return
     // todo:扣钱
     if (baseForm.paymentType === 'FREE_JOBS') {
       // 质押50USDT
       try {
-        console.log(`before 质押${(result as FreeJob).budget}USDT`)
-        await deposit((result as FreeJob).budget.toString(), true)
-        console.log(`after 质押${(result as FreeJob).budget}USDT`)
+        console.log(`before approve ${(result as FreeJob).budget}USDT`)
+        // await deposit((result as FreeJob).budget.toString(), true)
+        await approveUsdt((result as FreeJob).budget.toString())
+        setAmount((result as FreeJob).budget.toString())
       } catch (error) {
         alert('质押失败')
         return
@@ -142,25 +156,96 @@ export default function JobForm(props: JobFormProps) {
     if (baseForm.paymentType === 'PAY_PER_TASK') {
       const maxBudget = (result as PayPerTaskJob).maxBudget
       try {
-        console.log(`before 质押${maxBudget}USDT`)
-        await deposit(maxBudget.toString(), true)
-        console.log(`after 质押${maxBudget}USDT`)
+        console.log(`before approve ${maxBudget}USDT`)
+        // await deposit(maxBudget.toString(), true)
+        await approveUsdt(maxBudget.toString())
+        setAmount(maxBudget.toString())
       } catch (error) {
         alert('质押失败')
         return
       }
     }
 
-    try {
-      const res = await post('/api/job/create', result)
-      console.log('res', res)
-      if (res) {
-        onSuccess?.(res as Job)
-      }
-    } catch (error) {
-      console.error(error)
-    }
+    setJobInfo(result as Job)
+
+    // try {
+    //   const res = await post('/api/job/create', result)
+    //   console.log('res', res)
+    //   if (res) {
+    //     onSuccess?.()
+    //   }
+    // } catch (error) {
+    //   console.error(error)
+    // }
   }
+
+  const [waiting, setWaiting] = useState(false)
+  useEffect(() => {
+    async function checkTx() {
+      if (txHash && actionType && jobInfo) {
+        if (actionType === 'approveUsdt') {
+          setWaiting(true)
+          try {
+            setActionType(undefined)
+            await waitForTransaction(txHash)
+            console.log('授权成功')
+            await refetchUsdtAllowance()
+            setTimeout(() => {
+              setActionType('approveCompleted')
+            }, 300)
+          } catch (error) {
+            console.log('授权失败', error)
+          } finally {
+            setWaiting(false)
+          }
+          return
+        }
+        if (actionType === 'approveCompleted') {
+          try {
+            setActionType(undefined)
+            console.log('开始质押', amount)
+            await deposit(amount, false)
+          } catch (error) {
+            console.log('质押失败', error)
+          } finally {
+            setWaiting(false)
+          }
+        }
+        if (actionType === 'deposit') {
+          setWaiting(true)
+          try {
+            setActionType(undefined)
+            await waitForTransaction(txHash)
+            console.log('质押成功')
+            const res = await post('/api/job/create', jobInfo)
+            if (res) {
+              onSuccess?.()
+              setWaiting(false)
+            }
+          } catch (error) {
+            console.log('质押失败', error)
+          } finally {
+            setWaiting(false)
+          }
+        }
+      }
+    }
+    checkTx()
+  }, [
+    txHash,
+    actionType,
+    waitForTransaction,
+    setActionType,
+    onSuccess,
+    jobInfo,
+    amount,
+    deposit,
+    refetchUsdtAllowance
+  ])
+
+  const loading = useMemo(() => {
+    return isPending || waiting
+  }, [isPending, waiting])
 
   return (
     <div className='w-full flex flex-col gap-y-4'>
@@ -386,7 +471,7 @@ export default function JobForm(props: JobFormProps) {
         <Button color='orange' onClick={cancel}>
           取消
         </Button>
-        <Button color='indigo' onClick={confirm}>
+        <Button loading={loading} color='indigo' onClick={confirm}>
           确定
         </Button>
       </div>

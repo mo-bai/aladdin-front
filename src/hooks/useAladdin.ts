@@ -56,6 +56,7 @@ export const useAladdin = () => {
     | 'sendToAddress'
     | 'approveUsdt'
     | 'approveUsdtUnlimited'
+    | 'approveCompleted'
   >()
   // 各种loading状态
   const [isDepositLoading, setIsDepositLoading] = useState(false)
@@ -195,6 +196,8 @@ export const useAladdin = () => {
         args: [AladdinContractAddress, amountWei]
       })
 
+      setActionType('approveUsdt')
+
       // 等待授权交易确认
       if (hash) {
         await waitForTransaction(hash)
@@ -269,6 +272,7 @@ export const useAladdin = () => {
         functionName: 'deposit',
         args: [amountWei]
       })
+      setActionType('deposit')
 
       // 等待存款交易确认
       if (hash) {
