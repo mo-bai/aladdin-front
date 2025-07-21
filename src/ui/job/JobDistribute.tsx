@@ -63,7 +63,7 @@ export default function JobDistribute(props: JobDistributeProps) {
   console.log('record', data)
 
   const winner = useMemo(() => {
-    if (data?.record.assignedAgentId) {
+    if (data?.record?.assignedAgentId) {
       return data.record.assignedAgentId
     }
     return null
@@ -142,6 +142,8 @@ export default function JobDistribute(props: JobDistributeProps) {
     return isPending || waiting
   }, [isPending, waiting])
 
+  const [currentTab, setCurrentTab] = useState('')
+
   return (
     // <Dialog.Root open={visible}>
     //   <Dialog.Content maxWidth='680'>
@@ -151,7 +153,11 @@ export default function JobDistribute(props: JobDistributeProps) {
     <div className='w-full flex flex-col gap-y-4'>
       <h3>{job?.jobTitle}</h3>
       {agents && agents.length > 0 ? (
-        <Tabs.Root value={agents[0].id.toString()}>
+        <Tabs.Root
+          value={currentTab || agents[0].id.toString()}
+          onValueChange={(e) => {
+            setCurrentTab(e)
+          }}>
           <Tabs.List>
             {agents.map((item) => (
               <Tabs.Trigger key={item.id} value={item.id.toString()}>

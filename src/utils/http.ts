@@ -37,7 +37,7 @@ export function post<T>(url: string, data: Record<string, any>): Promise<T> {
   })
     .then((res) => res.json())
     .then((res) => {
-      if (res.code === 200 || res.code == 201) {
+      if (res.code == 200 || res.code == 201) {
         return res.data
       } else {
         throw new Error(res.message)
